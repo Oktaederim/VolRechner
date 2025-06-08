@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volumenstrom-Rechner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Volumenstrom-Rechner 💨</h1>
+
+    <div class="shape-toggle">
+        <input type="radio" id="shape-rechteck" name="shape" value="rechteck" checked>
+        <label for="shape-rechteck">Rechteckig</label>
+        <input type="radio" id="shape-rund" name="shape" value="rund">
+        <label for="shape-rund">Rund</label>
+    </div>
+
+    <div id="rechteck-inputs">
+        <div class="control-group">
+            <label for="laenge">Länge</label>
+            <div class="input-wrapper">
+                <input type="range" id="laenge" min="10" max="300" value="120" step="1">
+                <input type="number" id="laenge-num" min="10" max="300" value="120" step="1">
+                <span class="unit">cm</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="breite">Breite</label>
+            <div class="input-wrapper">
+                <input type="range" id="breite" min="1" max="50" value="10" step="1">
+                <input type="number" id="breite-num" min="1" max="50" value="10" step="1">
+                <span class="unit">cm</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="rund-inputs" style="display:none;">
+        <div class="control-group">
+            <label for="durchmesser">Durchmesser</label>
+            <div class="input-wrapper">
+                <input type="range" id="durchmesser" min="50" max="1000" value="100" step="1">
+                <input type="number" id="durchmesser-num" min="50" max="1000" value="100" step="1">
+                <span class="unit">mm</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label for="geschwindigkeit">Luftgeschwindigkeit</label>
+        <div class="input-wrapper">
+            <input type="range" id="geschwindigkeit" min="0.1" max="10.0" step="0.01" value="1.1">
+            <input type="number" id="geschwindigkeit-num" min="0.1" max="10.0" step="0.01" value="1.1">
+            <span class="unit">m/s</span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label for="zeta">Druckverlustbeiwert ζ (Zeta)</label>
+        <div class="input-wrapper">
+            <input type="range" id="zeta" min="0.1" max="10.0" step="0.01" value="1.5">
+            <input type="number" id="zeta-num" min="0.1" max="10.0" step="0.01" value="1.5">
+            <span class="unit"></span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label for="korrekturfaktor">Korrekturfaktor <span id="korrektur-prozent-val" class="value-display-extra"></span></label>
+        <div class="input-wrapper">
+            <input type="range" id="korrekturfaktor" min="0.5" max="1.5" step="0.01" value="1.0">
+            <input type="number" id="korrekturfaktor-num" min="0.5" max="1.5" step="0.01" value="1.0">
+            <span class="unit"></span>
+        </div>
+    </div>
+
+    <div class="result">
+        <p>Berechneter Volumenstrom:</p>
+        <h2 id="ergebnis"></h2>
+        <p id="druck-ergebnis"></p>
+    </div>
+
+    <button id="reset-btn">Standardwerte wiederherstellen</button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
