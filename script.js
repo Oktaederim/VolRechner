@@ -79,11 +79,29 @@ document.addEventListener('DOMContentLoaded', function () {
         berechnen();
     }
     
+        // Event Listeners für alle Paare einrichten
     for (const key in inputs) {
         const pair = inputs[key];
+        // Synchronisiert bei jeder Bewegung/Eingabe
         pair.slider.addEventListener('input', () => validateAndSync(pair.slider, pair.num));
         pair.num.addEventListener('input', () => validateAndSync(pair.num, pair.slider));
+        
+        // NEU: Formatiert die Zahleneingabe, wenn das Feld verlassen wird
+        pair.num.addEventListener('change', () => {
+            // Liest den Wert und wandelt ihn in eine saubere Zahl um (entfernt führende Nullen)
+            const numericValue = parseFloat(pair.num.value);
+
+            // Falls die Eingabe ungültig ist (z.B. leer oder nur Text),
+            // wird sie auf den sicheren Wert des Sliders zurückgesetzt.
+            if (isNaN(numericValue)) {
+                pair.num.value = pair.slider.value;
+            } else {
+                // Setzt den Wert des Feldes auf die saubere Zahl.
+                pair.num.value = numericValue;
+            }
+        });
     }
+
 
     function toggleShapeView() {
         const currentShape = document.querySelector('input[name="shape"]:checked').value;
