@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         zeta: 1.5,
     };
 
-    // Alle Input-Elemente holen
     const inputs = {
         laenge: { slider: document.getElementById('laenge'), num: document.getElementById('laenge-num') },
         breite: { slider: document.getElementById('breite'), num: document.getElementById('breite-num') },
@@ -61,7 +60,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateAndSync(source, target) {
         const min = parseFloat(source.min);
         const max = parseFloat(source.max);
-        let value = parseFloat(source.value);
+        
+        // NEU: Ersetzt das deutsche Komma durch einen Punkt, bevor die Zahl umgewandelt wird.
+        const sanitizedValue = source.value.replace(',', '.');
+        let value = parseFloat(sanitizedValue);
 
         if (isNaN(value)) {
             return; 
@@ -79,31 +81,23 @@ document.addEventListener('DOMContentLoaded', function () {
         berechnen();
     }
     
-     // Event Listeners für alle Paare einrichten
     for (const key in inputs) {
         const pair = inputs[key];
-        // Synchronisiert bei jeder Bewegung/Eingabe
         pair.slider.addEventListener('input', () => validateAndSync(pair.slider, pair.num));
         pair.num.addEventListener('input', () => validateAndSync(pair.num, pair.slider));
         
-        // NEU und ROBUSTER: Formatiert die Zahleneingabe mit 'blur', 
-        // wenn das Feld den Fokus verliert.
         pair.num.addEventListener('blur', () => {
-            // Liest den Wert und wandelt ihn in eine saubere Zahl um (entfernt führende Nullen)
-            const numericValue = parseFloat(pair.num.value);
+            // NEU: Auch hier das Komma ersetzen für die Endformatierung.
+            const sanitizedValue = pair.num.value.replace(',', '.');
+            const numericValue = parseFloat(sanitizedValue);
 
-            // Falls die Eingabe ungültig ist (z.B. leer oder nur Text),
-            // wird sie auf den sicheren Wert des Sliders zurückgesetzt.
             if (isNaN(numericValue)) {
                 pair.num.value = pair.slider.value;
             } else {
-                // Setzt den Wert des Feldes auf die saubere Zahl.
                 pair.num.value = numericValue;
             }
         });
     }
-
-
 
     function toggleShapeView() {
         const currentShape = document.querySelector('input[name="shape"]:checked').value;
