@@ -79,15 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
         berechnen();
     }
     
-        // Event Listeners für alle Paare einrichten
+     // Event Listeners für alle Paare einrichten
     for (const key in inputs) {
         const pair = inputs[key];
         // Synchronisiert bei jeder Bewegung/Eingabe
         pair.slider.addEventListener('input', () => validateAndSync(pair.slider, pair.num));
         pair.num.addEventListener('input', () => validateAndSync(pair.num, pair.slider));
         
-        // NEU: Formatiert die Zahleneingabe, wenn das Feld verlassen wird
-        pair.num.addEventListener('change', () => {
+        // NEU und ROBUSTER: Formatiert die Zahleneingabe mit 'blur', 
+        // wenn das Feld den Fokus verliert.
+        pair.num.addEventListener('blur', () => {
             // Liest den Wert und wandelt ihn in eine saubere Zahl um (entfernt führende Nullen)
             const numericValue = parseFloat(pair.num.value);
 
@@ -101,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
 
 
     function toggleShapeView() {
