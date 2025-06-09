@@ -79,7 +79,12 @@ h1 {
     color: #005a9e;
 }
 .result p { margin: 5px 0 0; color: #555; }
-#druck-ergebnis { font-size: 0.9em; margin-top: 15px; }
+
+#druck-ergebnis, #flaeche-ergebnis { 
+    font-size: 0.9em; 
+    margin-top: 10px; 
+}
+
 button {
     display: block;
     width: 100%;
