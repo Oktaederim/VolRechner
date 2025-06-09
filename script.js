@@ -23,8 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const korrekturProzentVal = document.getElementById('korrektur-prozent-val');
     const ergebnisAnzeige = document.getElementById('ergebnis');
     const druckErgebnisAnzeige = document.getElementById('druck-ergebnis');
-    // HIER IST DIE 1. FEHLENDE ZEILE:
-    const flaecheErgebnisAnzeige = document.getElementById('flaeche-ergebnis'); 
+    const flaecheErgebnisAnzeige = document.getElementById('flaeche-ergebnis');
     const shapeRadios = document.querySelectorAll('input[name="shape"]');
     const rechteckInputs = document.getElementById('rechteck-inputs');
     const rundInputs = document.getElementById('rund-inputs');
@@ -47,9 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
             flaeche_m2 = Math.PI * Math.pow(radius_m, 2);
         }
 
-        // HIER IST DER 2. FEHLENDE BLOCK:
         const flaeche_cm2 = flaeche_m2 * 10000; // 1 m² = 10.000 cm²
-        flaecheErgebnisAnzeige.textContent = `Querschnittsfläche: ${flaeche_cm2.toFixed(1)} cm²`;
+        // HIER IST DIE GEÄNDERTE ZEILE:
+        flaecheErgebnisAnzeige.textContent = `Querschnittsfläche: ${flaeche_cm2.toFixed(1)} cm² (${flaeche_m2.toFixed(4)} m²)`;
 
         const volumenstrom_m3s = flaeche_m2 * v * k;
         const volumenstrom_m3h = volumenstrom_m3s * 3600;
