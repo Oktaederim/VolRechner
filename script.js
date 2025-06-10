@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         durchmesser: 100, // in mm
         geschwindigkeit: 1.1,
         korrekturfaktor: 1.0,
-        zeta: 1.5,
+        zeta: 0,
     };
 
     const inputs = {
